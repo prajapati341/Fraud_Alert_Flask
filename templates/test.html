@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>HTML DOM Events</h1>
+<h2>The onclick Event</h2>
+
+<h3 id="demo" onclick="myFunction()">Click this text to change the color.</h3>
+
+<script>
+function myFunction() {
+  document.getElementById("demo").style.color = "red";
+}
+
+function verify()
+{
+    alert(document.getElementById("tak1").value)
+}
+
+function verify2()
+{
+    alert(document.getElementById("tak2").value)
+}
+</script>
+
+<button id="tak1" value="hello wo" onclick="verify()">Click Me</button>
+
+
+<button id="tak2" value="hello world2" onclick="verify2()">Click Me2</button>
+
+
+</body>
+</html>

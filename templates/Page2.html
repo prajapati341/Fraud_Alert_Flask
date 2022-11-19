@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+        <script> src="E:/Data Science with Python/Flask/Statics/bootstrap/css/bootstrap.min.css"</script>
+        <script> src="E:/Data Science with Python/Flask/Statics/bootstrap/js/bootstrap.min.js"</script>
+
+
+        <script  type="text/javascript">
+            function submitalert()
+            {
+                alert("Changes done");
+            }
+
+
+            function validation()
+            {
+                
+                gettype=document.getElementsByName("fraud_type")[0].value;
+                getInv=document.getElementsByName("investigator")[0].value;
+                getremarks=document.getElementsByName("Risk_Team_Remarks")[0].value;
+
+                if (gettype=="None" || gettype=="")
+                {
+                    alert("please select type")
+                    return false;
+                } 
+                else if (getInv=="None" || getInv=="")
+                {
+                    alert("Please write investigator name")
+                    return false;
+                } 
+                else if (getremarks=="None" || getremarks=="")
+                {
+                    alert("Please write remarks")
+                    return false;
+                } 
+                else
+                {
+                    return validation_confirmation();
+                }
+
+                
+            }
+
+            function validation_confirmation()
+            {
+                if (confirm("Confirm Yes or No")) 
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            function set_refresh()
+            {
+                history.go(0)
+                alert("Refresh Done");
+            }
+            function display_c()
+            {
+                var refresh=1000; // Refresh rate in milli seconds
+                mytime=setTimeout('display_ct()',refresh)
+            }
+
+            function display_ct() 
+            {
+                var x = new Date()
+                var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
+                x1 = x1 + " - " +  x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds();
+                document.getElementById('ct').innerHTML = x1;
+                display_c();
+            }
+
+            
+        </script>
+        <style>
+           table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+                border: 1px solid #ddd;
+                }
+
+                th 
+                {
+                text-align: left;
+                padding: 5px;
+                color: white;
+                background-color: rgb(176, 176, 240);
+                }
+
+                td {
+                text-align: left;
+                padding: 5px;
+                font-size: 10px;
+                
+                }
+
+                tr:nth-child(even){background-color: #f2f2f2}
+
+                tr:hover {background-color: rgb(208, 206, 244);font-weight: bold;}
+
+                #set_style{
+                    text-decoration:underline;
+                    font-weight: bolder;
+                    color: white;background-color: rgb(30, 129, 210);
+                    font-size: 10px;
+                    border: 0px;
+                }
+               
+        </style>
+       
+      
+    </head>
+    <body onload=display_ct(); >
+        <title>
+            Fraud Alerts
+        </title>
+        <div style="background-color: rgb(31, 187, 81);">
+            <p style="font-weight:bold ;"><div style="font-size: 40px;font-weight: bold;">Hello : {{user_session}}</div>
+                
+                <input type="button" value="Refresh" id="set_style" onclick="set_refresh()">
+
+                <span id='ct' style="font-weight: bolder;color: white;font-size: 15px;position: relative;left:32cm;"></span>
+
+                <a href="logout" style="text-decoration:underline;font-weight: bolder;color: white;background-color: chocolate;font-size: 20px;position: relative;left:32.5cm;" >Logout</a>
+
+                
+            </p>
+        
+        </div>
+        <div style="overflow-x:auto;">
+            
+        <form name="form1" action="/update" onsubmit="return validation()" method="post">
+        
+        <table border="1" stype="width:50%" >
+            
+         <tr >
+            <th colspan="41">
+                <div style="font-weight: bold;font-size: 30px;">Fraud Alert :
+                </div>
+                <div style="font-weight: bold;font-size: 15px;">
+                    (Total Count : {{ get_cnt }}, Unique Session Count : {{ get_unique_cnt }})
+                    <span style="font-size: 15px;color: red;font-weight: bold;position:absolute;left:20cm;">(Note : Please start updating from top row one-by-one)</span>
+                </div>
+                
+                    
+                
+            </th>
+        </tr>   
+        <tr>
+            <th>		</th>
+            <th>	Fraud_Found	</th>
+            <th>	Investigator	</th>
+            <th>	Risk_Team_Remarks	</th>
+
+            <th>	session_id	</th>
+            <th>	Winner	</th>
+            <th>	Winning	</th>
+            <th>	Helper	</th>
+            <th>	Winner_User	</th>
+            <th>	Helper_User	</th>
+            <th>	Wrong_Show	</th>
+            <th>	Table_Left	</th>
+            <th>	Dropped	</th>
+            <th>	Withdrawal_Request	</th>
+            <th>	Winner_KYC	</th>
+            <th>	Helper_KYC	</th>
+            <th>	Remarks	</th>
+            <th>	Login_IP_Status	</th>
+            <th>	Login_IP	</th>
+            <th>	Media_Source_Name	</th>
+            <th>	Media_Source_Status	</th>
+            <th>	Referral_Status	</th>
+            <th>	Helper_domain	</th>
+            <th>	Winner_domain	</th>
+            <th>	city	</th>
+            <th>	postal_code	</th>
+            <th>	device_fingerprint	</th>
+            <th>	registration_ip	</th>
+            <th>	game_type	</th>
+            <th>	Game_name	</th>
+            <th>	No_of_Players	</th>
+            <th>	Date	</th>
+            <th>	sess_start_time	</th>
+            <th>	sess_end_time	</th>
+            <th>	room_id	</th>
+            <th>	Winner_Email_ID	</th>
+            <th>	Winner_Mobile_ID	</th>
+            <th>	Helper_Email_ID	</th>
+            <th>	Helper_Mobile_ID	</th>
+            
+            <th>	Repeat_session_cnt	</th>
+            
+            <th>	Risk_Score	</th>
+            <th>	Fraud_Status	</th>
+            <th>	Winner_dep_to_wgr_ratio	</th>
+            <th>	Winner_dep_to_withdrawal_ratio	</th>
+            <th>	Helper_dep_to_wgr_ratio	</th>
+            <th>	Helper_dep_to_withdrawal_ratio	</th>
+            
+      
+        </tr>
+        
+     
+        {% if get_cnt>=1 %}
+        {% for row in get_result %}
+            <tr>
+                <td>
+                    <input type="submit" value="Submit"  style="font-weight: bolder;color: white;background-color: rgb(30, 129, 210);font-size: 15px;border: 0px;">
+                </td>
+                <td>            
+                    <select name="fraud_type" id="fraud_type"  style="font-size: 10px;">
+                        <option option="selected" value="{{row[35]}}">
+                            {% if row[35]=='None'%}
+                            {% endif %}    
+                        </option>
+                        <option value="Fraud Session">Fraud Session</option>
+                        <option value="No Fraud Session">No Fraud Session</option>
+                    </select>
+            </td>
+            <td><input type="text" value="{{row[37]}}" id="invt" name="investigator"  style="font-size: 10px;"></td>
+                <td><input type="text" value="{{row[38]}}" name="Risk_Team_Remarks"  style="font-size: 10px;"></td>
+                <td><input type="text" style="font-size: 10px;font-weight: bold;" value="{{row[0]}}" name="session_id"></td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+                <td>{{row[5]}}</td>
+                <td>{{row[6]}}</td>
+                <td>{{row[7]}}</td>
+                <td>{{row[8]}}</td>
+                <td>	{{row[9]}}	</td>
+                <td>	{{row[10]}}	</td>
+                <td>	{{row[11]}}	</td>
+                <td>	{{row[12]}}	</td>
+                <td>	{{row[13]}}	</td>
+                <td>	{{row[14]}}	</td>
+                <td>	{{row[15]}}	</td>
+                <td>	{{row[16]}}	</td>
+                <td>	{{row[17]}}	</td>
+                <td>	{{row[18]}}	</td>
+                <td>	{{row[19]}}	</td>
+                <td>	{{row[20]}}	</td>
+                <td>	{{row[21]}}	</td>
+                <td>	{{row[22]}}	</td>
+                <td>	{{row[23]}}	</td>
+                <td>	{{row[24]}}	</td>
+                <td>	{{row[25]}}	</td>
+                <td>	{{row[26]}}	</td>
+                <td>	{{row[27]}}	</td>
+                <td>	{{row[28]}}	</td>
+                <td>	{{row[29]}}	</td>
+                <td>	{{row[30]}}	</td>
+                <td>	{{row[31]}}	</td>
+                <td>	{{row[32]}}	</td>
+                <td>	{{row[33]}}	</td>
+                <td>	{{row[34]}}	</td>
+                
+                <td>	{{row[36]}}	</td>
+                
+                <td>	{{row[39]}}	</td>
+                <td>	{{row[40]}}	</td>
+                <td>	{{row[41]}}	</td>
+                <td>	{{row[42]}}	</td>
+                <td>	{{row[43]}}	</td>
+                <td>	{{row[44]}}	</td>
+
+
+                
+            </tr>
+        {% endfor %}
+        {% elif get_cnt==0 %}
+        <tr>
+            <td colspan="20">
+                <p>No Record</p> 
+            </td>
+        </tr>
+
+        {% endif %}
+        </table>
+        </form>
+        <br>
+        <span>
+            <p>
+                Last 3 days Fraud alert data
+            </p>
+        </span>
+            <form name="form2" action="{{url_for('page2')}}" method="post">
+                <label for="From date">Session date:</label>
+                <input type="date" id="fromdt" name="fromdt">
+                
+
+                <input type="submit">
+
+                    <div style="font-size: 1px;">
+                        {% for table in tables %}
+                            {{ table|safe }}
+                        {% endfor %}
+                    </div>
+            </form>
+        
+        </div>
+    </body>
+</html>

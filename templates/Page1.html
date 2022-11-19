@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+        <script>
+            function validateForm() {
+            let x = document.forms["myForm"]["fname"].value;
+            if (x == "") {
+                alert("Name must be filled out");
+                return false;
+            }
+            }
+
+        </script>
+    </head>
+    <body>
+        <title>
+            We are in Page 1
+        </title>
+        <p>We are in Page 1 {{first_name}}</p>
+        
+        <div class="container">
+            <h2>Badges on Buttons</h2>
+            <button type="button" class="btn btn-primary">Primary <span class="badge">7</span></button>
+            <button type="button" class="btn btn-success">Success <span class="badge">3</span></button>    
+            <button type="button" class="btn btn-danger">Danger <span class="badge">5</span></button>        
+          </div>
+
+        <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+            Name: <input type="text" name="fname">
+            <input type="submit" value="Submit">
+            </form>
+    </body>
+</html>
